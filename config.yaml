@@ -1,0 +1,12 @@
+credentials:
+  usernames:
+    user:
+      email: user@abc.com
+      name: User
+      password: $2b$12$dKMnkBZFpA7NHVqbSwAfjeH1nGcoy8Mfk/tCWwSJnOhh1iFpm/U2.
+cookie:
+  expiry_days: 30
+  key: key # Must be string
+  name: user
+preauthorized:
+  emails:
