@@ -22,6 +22,25 @@ with open('./config.yaml') as file:
     )
 
     name, authentication_status, username = authenticator.login('Login', 'sidebar')
+
+    sauce = """
+    <style>
+    footer {
+	    visibility: hidden;
+	}
+    footer:after {
+        content:'2023 - Made with ❤️ by PSK'; 
+        visibility: visible;
+        display: block;
+        position: relative;
+        padding: 5px;
+        top: calc(100vh - 2.5rem);
+        font-size: 1rem;
+    }
+    </style>
+    """
+
+    st.markdown(sauce, unsafe_allow_html=True)
     
     if authentication_status:
         st.write(f'Welcome *{name}*')

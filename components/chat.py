@@ -9,7 +9,7 @@ openai.api_key = os.getenv("OPENAI_API_KEY")
 
 
 def chat():
-    st.title('Docu Bot')
+    st.title('DocuBot Chat')
 
     st.text_area('Chat Log', key='chat', disabled=True, height=300)
 
@@ -28,7 +28,21 @@ def chat():
     </script>
     """
 
-    st.components.v1.html(js)
+    css = """
+    <style>
+        .block-container {
+            padding-bottom: 2rem !important;
+            padding-top: 2rem !important;
+        }
+        #root > div:nth-child(1) > div.withScreencast > div > div > div > section.main > div {
+            flex-grow: unset !important;
+            height: 0 !important;
+        }
+    </style>
+    """
+
+    st.components.v1.html(js, height=0)
+    st.markdown(css, unsafe_allow_html=True)
 
 def submit():
     st.session_state.chat += f'User: {st.session_state.B}'
