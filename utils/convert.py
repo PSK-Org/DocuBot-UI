@@ -1,13 +1,13 @@
 import requests
 import asyncio
-from pdfrw import PdfReader, PdfWriter
-from io import BytesIO
+import environ
 
 async def convert(filePath, format, file):
     """
     Send a PDF to the Windows server to be converted to a different format.
-    :param filePath: The path to the file to convert.
+    :param filePath: The path to the file to convert. If this is None, the file will be read from file.
     :param format: The format to convert the file to. (iml | kml | tex | mathml | hrtex)
+    :param file: The file to convert. If this is None, the file will be read from filePath.
     :return: The converted file as a bytestring.
     """
 
@@ -16,14 +16,16 @@ async def convert(filePath, format, file):
 
     url = "https://windows.samiyousef.ca"
 
-    headers = {"authorization": "1dfdd271-159a-414c-a947-a5d31dd6ffac"}
+    key = environ.Env().str("AUTH_TOKEN")
+
+    headers = {"authorization": key}
 
     if file is None:
         file = open(filePath, "rb").read()
 
     response = requests.post(f"{url}/uploadPDF/{format}",
                              data=file,
-                             headers={"authorization": "1dfdd271-159a-414c-a947-a5d31dd6ffac", "Content-Type": "application/octet-stream"})
+                             headers={"authorization": key, "Content-Type": "application/octet-stream"})
 
     if response.status_code != 200:
         print(response.text)
