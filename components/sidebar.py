@@ -1,4 +1,7 @@
 import streamlit as st
+import asyncio
+import time
+from utils.convert import convert
 
 def sidebar():
     with st.sidebar:
@@ -26,7 +29,26 @@ def sidebar():
             
             try:
                 with st.spinner("Processing Documents..."):
-                    upload_document(document)
-            except:
+
+                    upload_info = st.empty()
+                    upload_info.info("Converting...")
+                    print("Converting...")
+
+                    bytes_data = document.getvalue()
+                    data = asyncio.run(convert(None, "tex", bytes_data))
+                    
+                    upload_info.empty()
+                    upload_info.info("Done. Writing the file...")
+                    print(data)
+
+                    open("m136-test-out.tex", "wb").write(data)
+
+                    upload_info.empty()
+                    upload_info.info("✅ Wrote file to m136-test-out.tex")
+                    time.sleep(4)
+                    upload_info.empty()
+
+            except Exception as e:
+                print(e)
                 st.error("Upload failed!")
             print(document)

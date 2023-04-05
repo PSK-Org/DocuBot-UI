@@ -1,7 +1,6 @@
 import streamlit as st
 from streamlit_chat import message
 
-
 def chat():
     st.title('Docu Bot')
 
@@ -26,5 +25,7 @@ def chat():
 
 def submit():
     st.session_state.chat += f'\nB: {st.session_state.B}'
+
+    # Send to server and replace below with response
     st.session_state.chat += "\nA: Response from Model"
     st.session_state.B = ''
