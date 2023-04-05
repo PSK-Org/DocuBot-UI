@@ -1,6 +1,7 @@
 import requests
 import asyncio
-import environ
+from dotenv import load_dotenv
+load_dotenv()
 
 async def convert(filePath, format, file):
     """
@@ -16,7 +17,7 @@ async def convert(filePath, format, file):
 
     url = "https://windows.samiyousef.ca"
 
-    key = environ.Env().str("AUTH_TOKEN")
+    key = os.getenv("AUTH_TOKEN")
 
     headers = {"authorization": key}
 
