@@ -8,9 +8,13 @@ from yaml.loader import SafeLoader
 
 from components.login import login
 from components.sidebar import sidebar
-from components.chat import chat
+from components.chat import Chat
 
-with open('./config.yaml') as file:
+import asyncio
+
+def main(file):
+    chat = Chat()
+    
     config = yaml.load(file, Loader=SafeLoader)
 
     authenticator = stauth.Authenticate(
@@ -45,7 +49,7 @@ with open('./config.yaml') as file:
     if authentication_status:
         st.write(f'Welcome *{name}*')
         sidebar()
-        chat()
+        chat.chat()
     elif authentication_status is False:
         st.error('Username/password is incorrect')
     elif authentication_status is None:
@@ -54,3 +58,6 @@ with open('./config.yaml') as file:
     #with st.spinner("Loading..."):
         #time.sleep(5)
     #st.success("Done!")
+
+with open('./config.yaml') as file:
+    main(file)
