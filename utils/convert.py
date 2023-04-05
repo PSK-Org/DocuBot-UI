@@ -1,6 +1,8 @@
 import requests
 import asyncio
 from dotenv import load_dotenv
+import os
+
 load_dotenv()
 
 async def convert(filePath, format, file):

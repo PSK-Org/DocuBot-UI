@@ -24,9 +24,9 @@ def chat():
     st.components.v1.html(js)
 
 def submit():
-    st.session_state.chat += f'\nB: {st.session_state.B}'
+    st.session_state.chat += f'B: {st.session_state.B}'
 
     # Send to server and replace below with response
-    st.session_state.chat += "A: Response from Model"
+    st.session_state.chat += "\nA: Response from Model"
     st.session_state.B = ''
     st.session_state.chat += "\n\n"
